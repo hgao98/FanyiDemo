@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="translate" method="post">翻译内容（英文）：<input type="text" name="src"/><br/>
+        <input type="submit" value="翻译" />
+    </form>
+    <table border="1">
+        <tr>
+            <th>单词</th>
+            <th>翻译结果</th>
+        </tr>
+        <tr th:if="${#lists.isEmpty(session.resultList)}">
+            <td colspan="2">当前只支持翻译单词，请输入单词！</td>
+        </tr>
+        <tr th:unless="${#lists.isEmpty(session.resultList)}" th:each="ret : ${session.resultList}">
+            <!-- <td><a th:text="${fruit.fname}" th:href="@{'/edit.do?fid='+${fruit.fid}}">苹果</a></td> -->
+            <td><a th:text="${ret.src}"></a></td>
+            <td><a th:text="${ret.ret}"></a></td>
+        </tr>
+    </table>
+
+</body>
+</html>
